@@ -1,0 +1,19 @@
+{% extends 'auth_layout.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h1>Login</h1>
+<div class="login-form-container">
+    <form method="POST">
+        {% csrf_token %}
+        <!-- Considering that we are using the login views provided by DJjango,
+        we can get all the fields by just using {{ form }}. But since we are using
+        the Django-crispy-forms we do form|crispy-->
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-sm btn-outline-primary">
+            Login
+        </button>
+    </form>
+</div>
+
+{% endblock %}
