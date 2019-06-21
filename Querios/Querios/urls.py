@@ -14,12 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
-
+from django.urls import path, include, re_path
 # One step registration view that skips email verification
 from django_registration.backends.one_step.views import RegistrationView
 
+from core.views import IndexTemplateView
 from users.forms import CustomUserForm
+
+"""
+re_path allows for use of RegEx in path creation, so we can redirect every
+request to the IndexTemplate View.
+"""
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -40,6 +45,8 @@ urlpatterns = [
     # Login urls provided by Django to login users via browser
     path('accounts/', include('django.contrib.auth.urls')),
 
+    path ('api/', include('users.api.urls')),
+    
     # Login urls for Django's browsable API
     path ('api-auth/', include('rest_framework.urls')),
     
@@ -49,5 +56,7 @@ urlpatterns = [
     # Registration via REST
     path ('api/rest-auth/registration/', 
           include('rest_auth.registration.urls')),
-
+    
+    re_path(r'^.*$', IndexTemplateView.as_view(), name='entry-point'),
+    
 ]
