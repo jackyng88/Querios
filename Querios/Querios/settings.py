@@ -54,7 +54,8 @@ INSTALLED_APPS = [
     # Django package for creating nice looking forms.
     'crispy_forms',
 
-    'users'
+    'users',
+    'questions'
 ]
 
 MIDDLEWARE = [
