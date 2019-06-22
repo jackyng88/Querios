@@ -46,6 +46,8 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
 
     path ('api/', include('users.api.urls')),
+
+    path ('api/', include('questions.api.urls')),
     
     # Login urls for Django's browsable API
     path ('api-auth/', include('rest_framework.urls')),
