@@ -54,6 +54,10 @@ INSTALLED_APPS = [
     # Django package for creating nice looking forms.
     'crispy_forms',
 
+    # Django webpack loader that will allow our project to interact with the
+    # frontend webpack packages (designated in webpack-stats.json).
+    'webpack_loader',
+
     'users',
     'questions'
 ]
@@ -184,4 +188,12 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 2
+}
+
+# Config for webpack to allow for proper injection 
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'dist/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'frontend', 'webpack-stats.json'),
+    }
 }
