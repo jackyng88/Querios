@@ -153,7 +153,7 @@ USE_TZ = True
 # back to the homepage.
 LOGIN_URLS = 'accounts/login/'
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_RIDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 
 # Static files (CSS, JavaScript, Images)
