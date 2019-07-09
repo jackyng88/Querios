@@ -40,9 +40,10 @@
       <AnswerComponent 
         v-for="(answer, index) in answers"
         :answer="answer"
+        :requestUser="requestUser"
         :key="index" 
+        @delete-answer="deleteAnswer"
       />
-    
       <div class="my-4">
         <p v-show="loadingAnswers">...loading...</p>
         <button v-show="next"
@@ -57,7 +58,7 @@
 
 
 <script>
-import { apiService } from "../common/api.service.js"
+import { apiService } from "@/common/api.service.js"
 import AnswerComponent from "@/components/Answer.vue"
 // The @ is an alias for the src folder, equivalent to the below.
 //import { answerComponent} from "../components/Answer.js"
@@ -82,12 +83,18 @@ export default {
       userHasAnswered: false,
       showForm: false,
       next: null,
-      loadingAnswers: false
+      loadingAnswers: false,
+      requestUser: null
     }
   },
   methods: {
     setPageTitle(title) {
       document.title = title;
+    },
+
+    setRequestUser() {
+      this.requestUser = window.localStorage.getItem("username");
+
     },
 
     getQuestionData() {
@@ -136,12 +143,25 @@ export default {
       else {
         this.error = "Your answer can't be empty!"
       }
+    },
+
+    async deleteAnswer(answer) {
+      let endpoint = `/api/answers/${answer.id}/`;
+      try {
+        await apiService(endpoint, "DELETE")
+        this.$delete(this.answers, this.answers.indexOf(answer))
+        this.userHasAnswered = false;
+      }
+      catch (err) {
+        console.log(err)
+      }
     }
 
   },
   created() {
     this.getQuestionData()
     this.getQuestionAnswers()
+    this.setRequestUser()
   }
 }
 </script>
