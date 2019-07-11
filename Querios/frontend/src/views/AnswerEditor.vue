@@ -18,27 +18,19 @@ export default {
     id: {
       type: Number,
       required: true
-    },
-    previousAnswer: {
-      // the previous answer before being edited
-      type: String,
-      required: true
-    },
-    questionSlug: {
-      type: String,
-      required: true
-    }
+    } 
   },
   data() {
     return {
-      answerBody: this.previousAnswer,
+      questionSlug: null,
+      answerBody: null,
       error: null
     }
   },
   methods: {
     onSubmit() {
       if (this.answerBody) {
-        let endpoint = `api/answers/${this.id}/`;
+        let endpoint = `/api/answers/${this.id}/`;
         apiService(endpoint, "PUT", { body: this.answerBody })
           .then(() => {
             this.$router.push({
@@ -58,9 +50,12 @@ export default {
     // next - function that we use to move to the next hook in the pipeline
     let endpoint = `/api/answers/${to.params.id}/`;
     let data = await apiService(endpoint);
-    to.params.previousAnswer = data.body;
-    to.params.questionSlug = data.question_slug;
-    return next();
+    //to.params.previousAnswer = data.body;
+    //to.params.questionSlug = data.question_slug;
+    return next(vm => (
+      vm.answerBody = data.body,
+      vm.questionSlug = data.question_slug
+    ));
   }
 };
 </script>
