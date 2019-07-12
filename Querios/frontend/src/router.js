@@ -24,9 +24,11 @@ export default new Router({
       props: true
     },
     {
-      path: "/ask",
+      // Vue Router allows us to pass optional parameters with '?'
+      path: "/ask/:slug?",
       name: "question-editor",
-      component: QuestionEditor
+      component: QuestionEditor,
+      props: true
     },
     {
       path: "/answer/:id",

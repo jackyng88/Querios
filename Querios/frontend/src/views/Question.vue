@@ -2,6 +2,10 @@
   <div class="single-question mt-2">
     <div class="container">
       <h1>{{ question.content }}</h1>
+      <QuestionActions
+        v-if="isQuestionAuthor"
+        :slug="question.slug"
+      />
       <p class="mb-0">Posted by:
           <span class="author-name">{{ question.author }}</span>
       </p>
@@ -60,6 +64,7 @@
 <script>
 import { apiService } from "@/common/api.service.js"
 import AnswerComponent from "@/components/Answer.vue"
+import QuestionActions from "@/components/QuestionActions.vue"
 // The @ is an alias for the src folder, equivalent to the below.
 //import { answerComponent} from "../components/Answer.js"
 
@@ -72,7 +77,8 @@ export default {
     }
   },
   components: {
-    AnswerComponent
+    AnswerComponent,
+    QuestionActions
   },
   data() {
     return {
@@ -85,6 +91,11 @@ export default {
       next: null,
       loadingAnswers: false,
       requestUser: null
+    }
+  },
+  computed: {
+    isQuestionAuthor() {
+      return this.question.author === this.requestUser;
     }
   },
   methods: {
