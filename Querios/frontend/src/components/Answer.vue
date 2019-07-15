@@ -49,7 +49,7 @@ export default {
   },
   data() {
     return {
-      userLikedAnswer: this.answer.user_has_answered,
+      userLikedAnswer: this.answer.user_has_voted,
       likesCounter: this.answer.likes_count
     }
   },
@@ -64,30 +64,25 @@ export default {
     },
     
     toggleLike() {
-      // function using ternary operator to check if user has liked or not.
       this.userLikedAnswer === false
         ? this.likeAnswer()
-        : this.unlikeAnswer()
+        : this.unLikeAnswer()
     },
 
     likeAnswer() {
       this.userLikedAnswer = true;
       this.likesCounter += 1;
-      let endpoint = `/api/answers/${this.answer.id}/like/`;
+      let endpoint = `/api/answers/${ this.answer.id }/like/`;
       apiService(endpoint, "POST")
-
     },
 
-    unlikeAnswer() {
+    unLikeAnswer() {
       this.userLikedAnswer = false;
       this.likesCounter -= 1;
-      let endpoint = `/api/answers/${this.answer.id}/like/`;
+      let endpoint = `/api/answers/${ this.answer.id }/like/`;
       apiService(endpoint, "DELETE")
     }
   }
 }
 </script>
 
-<style>
-  
-</style>
