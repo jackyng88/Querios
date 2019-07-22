@@ -1,8 +1,16 @@
 # Querios
 Question/answer Single Page Application using Django, Django REST Framework and Vue.js
 
+## Installation
+1. Make sure you have Python3, and node.js installed.
 
-## Installation/How to use
+2. Navigate to the folder with requirements.txt and install the package dependencies on terminal/command prompt with - 
+  pip install - requirements.txt
+  
+3. Install the Vue.js project/module dependencies by navigating to the frontend/ folder with terminal and command prompt with the following command - 
+  npm install
+
+## How to use
 1. Currently the code is set with DEBUG=True in settings.py with Django routing to index.html template, change DEBUG=False to route it to index-dev.html or go to core/views.py and changing "if not settings.DEBUG" to "if settings.DEBUG"
 
 
