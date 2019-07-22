@@ -5,9 +5,11 @@ Question/answer Single Page Application using Django, Django REST Framework and 
 1. Make sure you have Python3, and node.js installed.
 
 2. Navigate to the folder with requirements.txt and install the package dependencies on terminal/command prompt with - 
+  
   pip install - requirements.txt
   
 3. Install the Vue.js project/module dependencies by navigating to the frontend/ folder with terminal and command prompt with the following command - 
+  
   npm install
 
 ## How to use
